@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)file:///C:/Users/Frewg/Downloads/bbqclub/bbq.html#calculator -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HS BBQ Club</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f5f5f7;
+      --text: #1d1d1f;
+      --text-secondary: #86868b;
+      --accent: #0071e3;
+      --accent-hover: #0077ed;
+      --radius-sm: 12px;
+      --radius-lg: 18px;
+      --radius-pill: 980px;
+      --nav-height: 52px;
+      --max-width: 1024px;
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.47059;
+      letter-spacing: -0.022em;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Navigation */
+    .glass-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-height);
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-content {
+      width: 100%;
+      max-width: var(--max-width);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 600;
+      font-size: 21px;
+      letter-spacing: -0.021em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 1; }
+    .nav-links a.active { opacity: 1; font-weight: 600; }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    /* Typography */
+    .eyebrow {
+      display: block;
+      font-size: 21px;
+      line-height: 1.19048;
+      font-weight: 600;
+      letter-spacing: 0.011em;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      font-size: clamp(48px, 8vw, 80px);
+      line-height: 1.05;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+    }
+
+    h2 {
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.07143;
+      font-weight: 600;
+      letter-spacing: -0.005em;
+    }
+
+    h3 {
+      font-size: 28px;
+      line-height: 1.14286;
+      font-weight: 600;
+      letter-spacing: 0.007em;
+    }
+
+    .lead {
+      font-size: 21px;
+      line-height: 1.381;
+      font-weight: 400;
+      color: var(--text-secondary);
+      max-width: 680px;
+      margin: 16px auto 0;
+    }
+
+    /* Layout */
+    .section {
+      padding: 120px 24px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .page { display: none; animation: fadeIn 0.6s ease; }
+    .page.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: var(--radius-pill);
+      background: var(--accent);
+      color: #fff;
+      font-size: 17px;
+      line-height: 1.17648;
+      font-weight: 400;
+      letter-spacing: -0.022em;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .btn:hover { background: var(--accent-hover); transform: scale(1.02); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      box-shadow: inset 0 0 0 1px var(--text);
+    }
+
+    .btn-secondary:hover { background: var(--text); color: #fff; }
+
+    .btn-small {
+      padding: 8px 16px;
+      font-size: 14px;
+      border-radius: var(--radius-pill);
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-ghost {
+      background: rgba(0,0,0,0.04);
+      color: var(--text);
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      text-align: left;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover { transform: scale(1.01); }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 140px 24px 100px;
+      background: radial-gradient(circle at 50% 0%, #fff8f0 0%, #ffffff 60%);
+    }
+
+    .hero-subtitle {
+      font-size: 21px;
+      line-height: 1.381;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin-top: 20px;
+    }
+
+    .hero-cta {
+      margin-top: 32px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .feature-grid {
+      padding-top: 0;
+      padding-bottom: 100px;
+    }
+
+    .feature-card {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      padding: 48px 32px;
+      text-align: center;
+    }
+
+    .feature-icon { font-size: 48px; margin-bottom: 16px; }
+
+    .feature-card h3 { font-size: 24px; margin-bottom: 8px; }
+
+    .feature-card p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.4211;
+    }
+
+    /* Stats */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      margin-top: 64px;
+    }
+
+    .stat { text-align: center; }
+
+    .stat-num {
+      display: block;
+      font-size: 48px;
+      font-weight: 600;
+      letter-spacing: -0.003em;
+      line-height: 1.08349;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      display: block;
+      margin-top: 6px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* Calculator */
+    .calc-card {
+      max-width: 720px;
+      margin: 48px auto 0;
+    }
+
+    .calc-inputs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      align-items: end;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    input, select {
+      width: 100%;
+      font-family: inherit;
+      font-size: 17px;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid #d2d2d7;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+    }
+
+    input:focus, select:focus { border-color: var(--accent); }
+
+    .calc-results {
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px solid #d2d2d7;
+    }
+
+    .result-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 24px;
+    }
+
+    .result-item {
+      background: #fff;
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      text-align: center;
+      border: 1px solid #e8e8ed;
+    }
+
+    .result-label {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .result-value {
+      display: block;
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.021em;
+      color: var(--text);
+    }
+
+    /* Publicity */
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      background: #fff;
+      border: 1px solid #e8e8ed;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 16px;
+      transition: background 0.2s;
+    }
+
+    .social-btn:hover { background: #fafafa; }
+
+    .plain-list {
+      list-style: none;
+      margin-top: 12px;
+    }
+
+    .plain-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid #e8e8ed;
+      font-size: 17px;
+    }
+
+    .link-btn {
+      display: inline-block;
+      margin-top: 16px;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 17px;
+    }
+
+    .link-btn:hover { text-decoration: underline; }
+
+    /* Sponsor */
+    .tier-card {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .tier-card h4 {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .price {
+      font-size: 40px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+    }
+
+    .tier-card ul {
+      list-style: none;
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .tier-card li { margin: 8px 0; }
+
+    /* Internal / Login */
+    #loginView {
+      min-height: 80vh;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+    }
+
+    .login-box {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .login-box input { margin-top: 8px; }
+
+    /* Dashboard */
+    #dashboardView { display: none; }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .timer-card .timer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .tag {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: rgba(0,0,0,0.06);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      color: var(--text-secondary);
+    }
+
+    .timer-display {
+      font-size: 48px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .timer-controls {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .timer-preset {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .chip {
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid #d2d2d7;
+      background: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      font-family: inherit;
+      color: var(--text);
+    }
+
+    .chip:hover { border-color: var(--accent); color: var(--accent); }
+
+    .turnin-row {
+      border-top: 1px solid #e8e8ed;
+      padding-top: 16px;
+    }
+
+    .turnin-row label { font-size: 14px; color: var(--text-secondary); }
+
+    .turnin-row input { margin-top: 6px; padding: 10px 12px; font-size: 16px; }
+
+    .turnin-countdown {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      color: var(--accent);
+    }
+
+    .process-steps { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+
+    /* Footer */
+    footer {
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 12px;
+      border-top: 1px solid #e8e8ed;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        inset: var(--nav-height) 0 0 0;
+        background: rgba(255,255,255,0.96);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        gap: 24px;
+        display: none;
+      }
+
+      .nav-links.open { display: flex; }
+      .menu-toggle { display: block; }
+      .section { padding: 80px 24px; }
+      h1 { font-size: clamp(36px, 10vw, 56px); }
+      .stats { gap: 32px; }
+      .timer-display { font-size: 36px; }
+      .login-box { padding: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="glass-nav">
+    <div class="nav-content">
+      <a href="file:///C:/Users/Frewg/Downloads/bbqclub/bbq.html#home" class="logo">HS BBQ Club</a>
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="file:///C:/Users/Frewg/Downloads/bbqclub/bbq.html#home" class="nav-a">Home</a></li>
+        <li><a href="file:///C:/Users/Frewg/Downloads/bbqclub/bbq.html#about" class="nav-a">About</a></li>
+        <li><a href="file:///C:/Users/Frewg/Downloads/bbqclub/bbq.html#calculator" class="nav-a">Calculator</a></li>
+        <li><a href="file:///C:/Users/Frewg/Downloads/bbqclub/bbq.html#publicity" class="nav-a">Publicity</a></li>
+        <li><a href="file:///C:/Users/Frewg/Downloads/bbqclub/bbq.html#sponsor" class="nav-a">Sponsor</a></li>
+        <li><a href="file:///C:/Users/Frewg/Downloads/bbqclub/bbq.html#internal" class="nav-a">Team</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HOME -->
+    <section id="home" class="page">
+      <div class="hero">
+        <h1>Low and Slow.<br>High School Style.</h1>
+        <p class="hero-subtitle">The pit is hot. The team is ready. Welcome to the home of championship BBQ, built different.</p>
+        <div class="hero-cta">
+          <a href="file:///C:/Users/Frewg/Downloads/bbqclub/bbq.html#about" class="btn">Explore the Pit</a>
+          <a href="file:///C:/Users/Frewg/Downloads/bbqclub/bbq.html#sponsor" class="btn btn-secondary">Donate Now</a>
+        </div>
+      </div>
+
+      <div class="section feature-grid">
+        <div class="grid-3">
+          <div class="feature-card">
+            <div class="feature-icon">🔥</div>
+            <h3>Live Fire</h3>
+            <p>We cook with wood, charcoal, and passion. Every competition is a lesson in patience, thermodynamics, and teamwork.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🏆</div>
+            <h3>Proven Results</h3>
+            <p>From local cookoffs to state finals, our smokers bring home hardware and our members bring home lifelong skills.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🤝</div>
+            <h3>Community First</h3>
+            <p>Catering fundraisers, teaching fire safety, and volunteering. We believe good BBQ should feed the whole neighborhood.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="page">
+      <div class="section">
+        <span class="eyebrow">About Us</span>
+        <h2>Pitmasters in Training.</h2>
+        <p class="lead">Founded in 2023, our high school BBQ club competes statewide while learning the science of smoke, heat, and flavor. We are students, grillers, and storytellers.</p>
+
+        <div class="stats">
+          <div class="stat"><span class="stat-num">12</span><span class="stat-label">Competitions</span></div>
+          <div class="stat"><span class="stat-num">500+</span><span class="stat-label">Lbs Smoked</span></div>
+          <div class="stat"><span class="stat-num">3</span><span class="stat-label">Years Running</span></div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- CALCULATOR -->
+    <section id="calculator" class="page active">
+      <div class="section">
+        <span class="eyebrow">Plan Your Cook</span>
+        <h2>BBQ Calculator.</h2>
+        <p class="lead">Estimate cook times, rest periods, and ready-by clocks so you never miss a turn-in window.</p>
+
+        <div class="calc-card card">
+          <div class="calc-inputs">
+            <div>
+              <label for="calcMeat">Meat Type</label>
+              <select id="calcMeat">
+                <option>Brisket</option>
+                
+                <option>Ribs</option>
+                <option>Chicken</option>
+              </select>
+            </div>
+            <div>
+              <label for="calcWeight">Weight (lbs)</label>
+              <input type="number" id="calcWeight" value="8" min="0.5" step="0.5">
+            </div>
+            <div>
+              <label for="calcTemp">Pit Temp</label>
+              <select id="calcTemp">
+                <option value="225">225°F</option>
+                <option value="250">250°F</option>
+                <option value="275">275°F</option>
+              </select>
+            </div>
+            <div>
+              <label for="calcTarget">Target Serving Time (optional)</label>
+              <input type="time" id="calcTarget">
+            </div>
+            <div style="grid-column: 1 / -1;">
+              <button class="btn" style="width:100%;" onclick="calculateCook()">Calculate</button>
+            </div>
+          </div>
+          <div id="calcResults" style="display:none;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUBLICITY -->
+    <section id="publicity" class="page">
+      <div class="section">
+        <span class="eyebrow">Publicity</span>
+        <h2>Follow the Smoke.</h2>
+        <p class="lead">See where we have been and where we are headed next.</p>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>Social Media</h3>
+            <p style="color:var(--text-secondary);margin:8px 0 16px;">Tag us and watch the fire in real time.</p>
+            <div class="social-links">
+              <a href="https://instagram.com/" target="_blank" rel="noopener" class="social-btn">Instagram</a>
+              <a href="https://tiktok.com/" target="_blank" rel="noopener" class="social-btn">TikTok</a>
+              <a href="https://x.com/" target="_blank" rel="noopener" class="social-btn">Twitter / X</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Competitions</h3>
+            <ul class="plain-list">
+              <li><strong>Regionals 2025</strong><br><span style="color:var(--text-secondary)">1st Place Ribs</span><br>
+<span style="color:var(--text-secondary)">1st Place Brisket</span></li>
+              
+              
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Community Outreach</h3>
+            <p style="color:var(--text-secondary);margin:8px 0 12px;">We cater local fundraisers, teach elementary students about fire safety, and volunteer quarterly at the city food bank.</p>
+            <a href="file:///C:/Users/Frewg/Downloads/bbqclub/bbq.html#sponsor" class="link-btn">Partner with us →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPONSOR -->
+    <section id="sponsor" class="page">
+      <div class="section">
+        <span class="eyebrow">Support the Pit</span>
+        <h2>Fuel the Fire.</h2>
+        <p class="lead">Sponsorships and donations keep our smokers running and our students learning. Every dollar feeds the mission.</p>
+
+        <div class="grid-3">
+          <div class="tier-card">
+            <h4>Bronze</h4>
+            <div class="price">$100</div>
+            <ul>
+              <li>Logo on website</li>
+              <li>Social media shoutout</li>
+              <li>Newsletter mention</li>
+            </ul>
+            <button class="btn btn-secondary" style="width:100%;" onclick="alert(&#39;Thank you for choosing Bronze! Wire this to a real payment processor.&#39;)">Choose Bronze</button>
+          </div>
+          <div class="tier-card">
+            <h4>Silver</h4>
+            <div class="price">$250</div>
+            <ul>
+              <li>Everything in Bronze</li>
+              <li>Logo on competition apron</li>
+              <li>Shoutout at turn-ins</li>
+            </ul>
+            <button class="btn btn-secondary" style="width:100%;" onclick="alert(&#39;Thank you for choosing Silver! Wire this to a real payment processor.&#39;)">Choose Silver</button>
+          </div>
+          <div class="tier-card">
+            <h4>Gold</h4>
+            <div class="price">$500</div>
+            <ul>
+              <li>Everything in Silver</li>
+              <li>Named category sponsor</li>
+              <li>VIP tasting invite</li>
+            </ul>
+            <button class="btn" style="width:100%;" onclick="alert(&#39;Thank you for choosing Gold! Wire this to a real payment processor.&#39;)">Choose Gold</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERNAL / TEAM -->
+    <section id="internal" class="page">
+      <div id="loginView" style="display: flex;">
+        <div class="login-box">
+          <h2 style="text-align:center;margin-bottom:24px;">Team Login</h2>
+          <label>Username<input type="text" id="username" placeholder="pitmaster" autocomplete="username"></label>
+          <label style="display:block;margin-top:12px;">Password<input type="password" id="password" placeholder="smoke2026" autocomplete="current-password"></label>
+          <button class="btn" style="width:100%;margin-top:20px;" onclick="handleLogin()">Sign In</button>
+          <p style="text-align:center;margin-top:16px;color:var(--text-secondary);font-size:14px;">Demo: pitmaster / smoke2026</p>
+        </div>
+      </div>
+
+      <div id="dashboardView" style="display: none;">
+        <div class="section" style="max-width:1200px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:20px;">
+            <div style="text-align:left;">
+              <span class="eyebrow">Internal</span>
+              <h2>Competition Dashboard.</h2>
+            </div>
+            <button class="btn btn-secondary" onclick="handleLogout()">Sign Out</button>
+          </div>
+
+          <div class="dashboard-grid">
+            <!-- Beans -->
+            <div class="card timer-card">
+              <div class="timer-header"><h3>Beans</h3><span class="tag">Side</span></div>
+              <div class="timer-display" id="beans-display">00:00:00</div>
+              <div class="timer-controls">
+                <button class="btn-small" onclick="startMeatTimer(&#39;beans&#39;)">Start</button>
+                <button class="btn-small btn-ghost" onclick="pauseMeatTimer(&#39;beans&#39;)">Pause</button>
+                <button class="btn-small btn-ghost" onclick="resetMeatTimer(&#39;beans&#39;)">Reset</button>
+              </div>
+              <div class="timer-preset">
+                <button class="chip" onclick="setTimer(&#39;beans&#39;, 14400)">4 hrs</button>
+                <button class="chip" onclick="setTimer(&#39;beans&#39;, 10800)">3 hrs</button>
+                <button class="chip" onclick="setTimer(&#39;beans&#39;, 1800)">30 min</button>
+              </div>
+              <div class="turnin-row">
+                <label>Turn-in Time<input type="time" id="beans-turnin" onchange="updateTurnIn(&#39;beans&#39;)"></label>
+                <div class="turnin-countdown" id="beans-turnin-display">--:--:--</div>
+              </div>
+            </div>
+
+            <!-- Dessert -->
+            <div class="card timer-card">
+              <div class="timer-header"><h3>Dessert</h3><span class="tag">Sweet Finish</span></div>
+              <div class="timer-display" id="dessert-display">00:00:00</div>
+              <div class="timer-controls">
+                <button class="btn-small" onclick="startMeatTimer(&#39;dessert&#39;)">Start</button>
+                <button class="btn-small btn-ghost" onclick="pauseMeatTimer(&#39;dessert&#39;)">Pause</button>
+                <button class="btn-small btn-ghost" onclick="resetMeatTimer(&#39;dessert&#39;)">Reset</button>
+              </div>
+              <div class="timer-preset">
+                <button class="chip" onclick="setTimer(&#39;dessert&#39;, 7200)">2 hrs</button>
+                <button class="chip" onclick="setTimer(&#39;dessert&#39;, 3600)">1 hr</button>
+              </div>
+              <div class="turnin-row">
+                <label>Turn-in Time<input type="time" id="dessert-turnin" onchange="updateTurnIn(&#39;dessert&#39;)"></label>
+                <div class="turnin-countdown" id="dessert-turnin-display">--:--:--</div>
+              </div>
+            </div>
+
+            <!-- Ribs -->
+            <div class="card timer-card">
+              <div class="timer-header"><h3>Ribs</h3><span class="tag">Main</span></div>
+              <div class="process-steps" style="margin-bottom:6px;">
+                <button class="chip" onclick="setTimer(&#39;ribs&#39;, 180, &#39;Smoke&#39;)">Smoke 3h</button>
+                <button class="chip" onclick="setTimer(&#39;ribs&#39;, 120, &#39;Wrap&#39;)">Wrap 2h</button>
+                <button class="chip" onclick="setTimer(&#39;ribs&#39;, 15, &#39;Rest&#39;)">Rest 15m</button>
+                <button class="chip" onclick="setTimer(&#39;ribs&#39;, 10800)">Full 6h</button>
+              </div>
+              <div id="ribs-stage-label" style="font-size:14px;color:var(--text-secondary);margin-bottom:12px;">Select a process</div>
+              <div class="timer-display" id="ribs-display">00:00:00</div>
+              <div class="timer-controls">
+                <button class="btn-small" onclick="startMeatTimer(&#39;ribs&#39;)">Start</button>
+                <button class="btn-small btn-ghost" onclick="pauseMeatTimer(&#39;ribs&#39;)">Pause</button>
+                <button class="btn-small btn-ghost" onclick="resetMeatTimer(&#39;ribs&#39;)">Reset</button>
+              </div>
+              <div class="turnin-row">
+                <label>Turn-in Time<input type="time" id="ribs-turnin" onchange="updateTurnIn(&#39;ribs&#39;)"></label>
+                <div class="turnin-countdown" id="ribs-turnin-display">--:--:--</div>
+              </div>
+            </div>
+
+            <!-- Chicken -->
+            <div class="card timer-card">
+              <div class="timer-header"><h3>Chicken</h3><span class="tag">Main</span></div>
+              <div class="timer-display" id="chicken-display">00:00:00</div>
+              <div class="timer-controls">
+                <button class="btn-small" onclick="startMeatTimer(&#39;chicken&#39;)">Start</button>
+                <button class="btn-small btn-ghost" onclick="pauseMeatTimer(&#39;chicken&#39;)">Pause</button>
+                <button class="btn-small btn-ghost" onclick="resetMeatTimer(&#39;chicken&#39;)">Reset</button>
+              </div>
+              <div class="timer-preset">
+                <button class="chip" onclick="setTimer(&#39;chicken&#39;, 10800)">3 hrs</button>
+                <button class="chip" onclick="setTimer(&#39;chicken&#39;, 7200)">2 hrs</button>
+                <button class="chip" onclick="setTimer(&#39;chicken&#39;, 9000)">2.5 hrs</button>
+              </div>
+              <div class="turnin-row">
+                <label>Turn-in Time<input type="time" id="chicken-turnin" onchange="updateTurnIn(&#39;chicken&#39;)"></label>
+                <div class="turnin-countdown" id="chicken-turnin-display">--:--:--</div>
+              </div>
+            </div>
+
+            <!-- Brisket -->
+            <div class="card timer-card">
+              <div class="timer-header"><h3>Brisket</h3><span class="tag">Main</span></div>
+              <div class="timer-display" id="brisket-display">00:00:00</div>
+              <div class="timer-controls">
+                <button class="btn-small" onclick="startMeatTimer(&#39;brisket&#39;)">Start</button>
+                <button class="btn-small btn-ghost" onclick="pauseMeatTimer(&#39;brisket&#39;)">Pause</button>
+                <button class="btn-small btn-ghost" onclick="resetMeatTimer(&#39;brisket&#39;)">Reset</button>
+              </div>
+              <div class="timer-preset">
+                <button class="chip" onclick="setTimer(&#39;brisket&#39;, 43200)">12 hrs</button>
+                <button class="chip" onclick="setTimer(&#39;brisket&#39;, 32400)">9 hrs</button>
+                <button class="chip" onclick="setTimer(&#39;brisket&#39;, 28800)">8 hrs</button>
+              </div>
+              <div class="turnin-row">
+                <label>Turn-in Time<input type="time" id="brisket-turnin" onchange="updateTurnIn(&#39;brisket&#39;)"></label>
+                <div class="turnin-countdown" id="brisket-turnin-display">--:--:--</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year">2026</span> High School BBQ Club. Built with patience, smoke, and precision.</p>
+    <p style="margin-top:6px;"><a href="file:///C:/Users/Frewg/Downloads/bbqclub/bbq.html#home" style="color:inherit;">Home</a> · <a href="file:///C:/Users/Frewg/Downloads/bbqclub/bbq.html#about" style="color:inherit;">About</a> · <a href="file:///C:/Users/Frewg/Downloads/bbqclub/bbq.html#sponsor" style="color:inherit;">Donate</a></p>
+  </footer>
+
+  <script>
+    // ---- Router ----
+    const pages = ['home','about','calculator','publicity','sponsor','internal'];
+
+    function showPage(id) {
+      const target = id || 'home';
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const el = document.getElementById(target);
+      if (el) el.classList.add('active');
+
+      document.querySelectorAll('.nav-a').forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + target);
+      });
+
+      if (target === 'internal') renderInternal();
+      document.getElementById('navLinks').classList.remove('open');
+      window.scrollTo(0, 0);
+    }
+
+    window.addEventListener('hashchange', () => showPage(location.hash.slice(1)));
+    window.addEventListener('DOMContentLoaded', () => showPage(location.hash.slice(1)));
+    function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
+
+    // ---- Auth ----
+    const AUTH_KEY = 'bbq_auth_demo';
+
+    function isAuth() { return localStorage.getItem(AUTH_KEY) === 'true'; }
+
+    function handleLogin() {
+      const u = document.getElementById('username').value.trim();
+      const p = document.getElementById('password').value.trim();
+      if (u === 'pitmaster' && p === 'smoke2026') {
+        localStorage.setItem(AUTH_KEY, 'true');
+        renderInternal();
+      } else {
+        alert('Invalid credentials. Try pitmaster / smoke2026');
+      }
+    }
+
+    function handleLogout() {
+      localStorage.removeItem(AUTH_KEY);
+      renderInternal();
+    }
+
+    function renderInternal() {
+      const loginView = document.getElementById('loginView');
+      const dashView = document.getElementById('dashboardView');
+      if (isAuth()) {
+        loginView.style.display = 'none';
+        dashView.style.display = 'block';
+      } else {
+        loginView.style.display = 'flex';
+        dashView.style.display = 'none';
+      }
+    }
+
+    // ---- Timers ----
+    const meats = ['beans','dessert','ribs','chicken','brisket'];
+    const timers = {};
+
+    meats.forEach(m => {
+      timers[m] = { remaining: 0, running: false, interval: null, label: '' };
+    });
+
+    function fmt(total) {
+      const h = Math.floor(total / 3600);
+      const m = Math.floor((total % 3600) / 60);
+      const s = total % 60;
+      return [h, m, s].map(v => String(v).padStart(2, '0')).join(':');
+    }
+
+    function setTimer(key, seconds, label) {
+      pauseMeatTimer(key);
+      timers[key].remaining = seconds;
+      timers[key].label = label || '';
+      updateDisplay(key);
+      if (key === 'ribs' && label) {
+        document.getElementById('ribs-stage-label').textContent = 'Current stage: ' + label;
+      }
+    }
+
+    function updateDisplay(key) {
+      const el = document.getElementById(key + '-display');
+      if (el) el.textContent = fmt(timers[key].remaining);
+    }
+
+    function startMeatTimer(key) {
+      const t = timers[key];
+      if (t.running || t.remaining <= 0) return;
+      t.running = true;
+      t.interval = setInterval(() => {
+        t.remaining--;
+        updateDisplay(key);
+        if (t.remaining <= 0) {
+          pauseMeatTimer(key);
+          // Simple visual cue when done
+          document.getElementById(key + '-display').style.color = '#d97706';
+        }
+      }, 1000);
+    }
+
+    function pauseMeatTimer(key) {
+      const t = timers[key];
+      t.running = false;
+      clearInterval(t.interval);
+    }
+
+    function resetMeatTimer(key) {
+      pauseMeatTimer(key);
+      timers[key].remaining = 0;
+      timers[key].label = '';
+      const el = document.getElementById(key + '-display');
+      el.textContent = '00:00:00';
+      el.style.color = '';
+      if (key === 'ribs') {
+        document.getElementById('ribs-stage-label').textContent = 'Select a process';
+      }
+    }
+
+    // ---- Turn-in reminders ----
+    const turnIns = {};
+
+    setInterval(() => {
+      const now = new Date();
+      meats.forEach(key => {
+        const target = turnIns[key];
+        const el = document.getElementById(key + '-turnin-display');
+        if (!el || !target) return;
+        const diff = Math.floor((target - now) / 1000);
+        if (diff <= 0) {
+          el.textContent = 'TURN IN NOW';
+          el.style.color = '#d97706';
+        } else {
+          el.textContent = fmt(diff) + ' left';
+          el.style.color = 'var(--accent)';
+        }
+      });
+    }, 1000);
+
+    function updateTurnIn(key) {
+      const val = document.getElementById(key + '-turnin').value;
+      if (!val) return;
+      const [h, m] = val.split(':').map(Number);
+      const target = new Date();
+      target.setHours(h, m, 0, 0);
+      if (target < new Date()) target.setDate(target.getDate() + 1);
+      turnIns[key] = target;
+    }
+
+    // ---- Calculator ----
+    function calculateCook() {
+      const meat = document.getElementById('calcMeat').value;
+      const weight = parseFloat(document.getElementById('calcWeight').value) || 0;
+      const temp = parseInt(document.getElementById('calcTemp').value);
+      const targetInput = document.getElementById('calcTarget').value;
+
+      let hrsPerLb = 0, minHours = 0, restMin = 0;
+
+      if (meat === 'Brisket') {
+        hrsPerLb = temp === 225 ? 1.25 : temp === 250 ? 1.0 : 0.85;
+        restMin = 120;
+        minHours = 8;
+      } else if (meat === 'Pork Shoulder') {
+        hrsPerLb = temp === 225 ? 1.5 : temp === 250 ? 1.25 : 1.1;
+        restMin = 120;
+        minHours = 6;
+      } else if (meat === 'Ribs') {
+        minHours = temp === 225 ? 5.5 : temp === 250 ? 5.0 : 4.5;
+        restMin = 15;
+      } else if (meat === 'Chicken') {
+        minHours = temp === 225 ? 3.5 : temp === 250 ? 3.0 : 2.5;
+        restMin = 15;
+      }
+
+      let cookMin = 0;
+      if (hrsPerLb > 0) cookMin = Math.ceil(weight * hrsPerLb * 60);
+      else cookMin = Math.ceil(minHours * 60);
+
+      const prepMin = 30;
+      const totalMin = cookMin + restMin + prepMin;
+      const readyBy = new Date(Date.now() + totalMin * 60000);
+
+      const container = document.getElementById('calcResults');
+      container.style.display = 'block';
+      container.innerHTML = `
+        <div class="result-row">
+          <div class="result-item">
+            <span class="result-label">Cook Time</span>
+            <span class="result-value">${Math.floor(cookMin/60)}h ${cookMin%60}m</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Rest & Prep</span>
+            <span class="result-value">${Math.floor((restMin+prepMin)/60)}h ${(restMin+prepMin)%60}m</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Total</span>
+            <span class="result-value">${Math.floor(totalMin/60)}h ${totalMin%60}m</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Ready By</span>
+            <span class="result-value">${readyBy.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</span>
+          </div>
+        </div>
+        ${targetInput ? `<p style="margin-top:16px;color:var(--text-secondary);">To hit your target, start cooking by ${new Date(readyBy - totalMin*60000).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}.</p>` : ''}
+      `;
+    }
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+
+</body></html>
